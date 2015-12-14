@@ -63,7 +63,8 @@ module GTFS
         unless @collection && ORM.path == @last_path
           raise NonExistentResourceError unless File.exist?(file_path)
           @collection = []
-          CSV.read(file_path, headers: true).map do |row|
+          mode = ORM.encoding.nil? ? 'r' : "r:#{encoding}:utf-8"
+          CSV.read(file_path, mode, headers: true).map do |row|
             @collection << new( Hash[row.headers.zip(row.fields)] )
           end
           @last_path = ORM.path.dup

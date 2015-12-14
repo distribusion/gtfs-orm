@@ -22,6 +22,14 @@ module GTFS
       @path ||= DEFAULT_PATH
     end
 
+    def self.encoding=(encoding=nil)
+      @encoding = encoding
+    end
+
+    def self.encoding
+      @encoding
+    end
+
   end
 end
 
