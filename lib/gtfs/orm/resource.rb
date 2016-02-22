@@ -48,6 +48,14 @@ module GTFS
         Scope.new(collection)
       end
 
+      def self.from_csv(array_of_csv_rows)
+        @collection = []
+        @last_path = ORM.path
+        array_of_csv_rows.to_a.each do |row|
+          add_csv_row_to_collection(row)
+        end
+      end
+
       private
 
       def self.base_path
@@ -65,11 +73,16 @@ module GTFS
           @collection = []
           mode = ORM.encoding.nil? ? 'r' : "r:#{ORM.encoding}"
           CSV.read(file_path, mode, headers: true).map do |row|
-            @collection << new( Hash[row.headers.zip(row.fields)] )
+            add_csv_row_to_collection(row)
           end
           @last_path = ORM.path.dup
         end
         @collection
+      end
+
+      def self.add_csv_row_to_collection(row)
+        raise CSV::MalformedCSVError.new('content is not a CSV::Row') unless row.is_a?(CSV::Row)
+        @collection << new( Hash[row.headers.zip(row.fields)] )
       end
 
       class Scope

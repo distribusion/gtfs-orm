@@ -1,0 +1,3 @@
+2016-02-22:
+- Added option (#from_csv method) to load GTFS::ORM resources directly from CSV::Row data
+  instead of requiring to read from file
