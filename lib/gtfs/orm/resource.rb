@@ -163,9 +163,10 @@ module GTFS
           arr = collection.select do |item|
             match = true
             if conditions
-              conditions.each_pair do |k,v|
-                if item.respond_to?(k)
-                  match = false unless item.send(k) == v
+              conditions.each_pair do |attribute, desired_value|
+                if item.respond_to?(attribute)
+                  value = item.send(attribute)
+                  match = false unless (value == desired_value) || (desired_value.respond_to?(:include?) && desired_value.include?(value))
                 end
               end
             end
