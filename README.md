@@ -108,7 +108,7 @@ scope.all
 GTFS ORM relies upon the existence of an uncompressed GTFS dir. In order to specify the path, the following configuration must be run before attempting to access any Resources.
 
 ```
-GTFS.path('/path/to/uncompressed/gtfs/dir')
+GTFS::ORM.path('/path/to/uncompressed/gtfs/dir')
 ```
 
 Once the path has been specified, Resources can be accessed in the following manner.

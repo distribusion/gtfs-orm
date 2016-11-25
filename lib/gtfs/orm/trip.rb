@@ -28,6 +28,10 @@ module GTFS
         Calendar.where(service_id: service_id)
       end
 
+      def calendar_date
+        CalendarDate.where(service_id: service_id)
+      end
+
       def shape
         Shape.where(shape_id: shape_id)
       end
