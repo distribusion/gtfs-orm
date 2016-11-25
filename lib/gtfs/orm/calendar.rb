@@ -26,7 +26,7 @@ module GTFS
       end
 
       def calendar_date
-        CalendarDate.where(service_id: service_id, date: start_date..end_date)
+        CalendarDate.where(service_id: service_id)
       end
 
     end
